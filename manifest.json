@@ -1,0 +1,14 @@
+{
+    "libspinner": {
+        "files": [
+            "spinner.c",
+            "spinner.h"
+        ]
+    },
+    "librtime": {
+       "files": [
+            "r_time.c",
+            "r_time.h"
+        ] 
+    }
+}
