@@ -10,5 +10,46 @@
             "r_time.c",
             "r_time.h"
         ] 
+    },
+    "libdotenv": {
+        "files": [
+            "dot_env.c",
+            "dot_env.h"
+        ]
+    },
+    "libcolor": {
+        "files": [
+            "color.h"
+        ]
+    },
+    "libhttp": {
+        "files": [
+            "http.c",
+            "http.h"
+        ]
+    },
+    "libgithub": {
+        "files": [
+            "github.c",
+            "github.h"
+        ]
+    },
+    "liblogger": {
+        "files": [
+            "logger.c",
+            "logger.h"
+        ]
+    },
+    "crosscheck": {
+        "files": [
+            "crosscheck.c",
+            "crosscheck.h"
+        ]
+    },
+    "libbenchmark": {
+        "files": [
+            "benchmark.c",
+            "benchmark.h"
+        ]
     }
 }

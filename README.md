@@ -1,6 +1,6 @@
 # Tools
 
-This repository contains a lot of the tools I use on a regular basis for daily development.
+This repository contains a lot of the tools I use on a regular basis for daily development. For the Go tools, the normal install and dependency management practices apply. For the C code, a script called `flotsam` is supplied that will easily allow for the downloading of relevant files per project.
 
 ## C
 

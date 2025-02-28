@@ -1,0 +1,81 @@
+#!/bin/sh
+
+# SPDX-License-Identifier: BSD-2-Clause
+#
+# Copyright (c) 2025 Brian J. Downs
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+# OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.
+
+set -e
+
+if [ -n "${DEBUG}" ]; then
+    set -x
+fi
+
+USERNAME="briandowns"
+TOOLS_REPO="tools"
+MANIFEST_FILE="manifest.json"
+
+TMP_DIR=$(mktemp -d)
+if [ ! "${TMP_DIR}" ] || [ ! -d "${TMP_DIR}" ]; then
+    echo "error: failed to create tmp dir"
+    exit 1
+fi
+
+cleanup() {      
+    rm -rf "${TMP_DIR}"
+}
+
+update() {
+    wget -O "${TMP_DIR}/manifest.json" "https://raw.githubusercontent.com/${USERNAME}/${TOOLS_REPO}/master/${MANIFEST_FILE}"
+}
+
+download() {
+    repo=$1
+    tag=$2
+
+    for file in $(jq -r -c ".${repo}.files[]" < "${TMP_DIR}/manifest.json"); do
+        if [ -n "${DEBUG}" ]; then
+            wget --verbose -O "${file}" "https://raw.githubusercontent.com/briandowns/${repo}/${tag}/${file}"
+        else
+            wget -q -O "${file}" "https://raw.githubusercontent.com/briandowns/${repo}/${tag}/${file}"
+        fi
+    done
+}
+
+if [ "$1" = "" ]; then
+    echo "error: repository required"
+    exit 1
+fi
+
+REPO=$1
+TAG="master"
+
+if [ "$2" != "" ]; then
+    TAG=$2
+fi 
+
+trap cleanup EXIT
+update
+download "${REPO}" "${TAG}"
+
+exit 0
