@@ -35,6 +35,7 @@ GITHUB_URL="https://raw.githubusercontent.com"
 USERNAME="briandowns"
 TOOLS_REPO="tools"
 MANIFEST_FILE="manifest.json"
+FLOTSAM_FILE=".flotsam"
 
 TMP_DIR=$(mktemp -d)
 if [ ! "${TMP_DIR}" ] || [ ! -d "${TMP_DIR}" ]; then
@@ -56,12 +57,12 @@ download() {
 
     for file in $(jq -r -c ".${repo}.files[]" < "${TMP_DIR}/${MANIFEST_FILE}"); do
         if [ -n "${DEBUG}" ]; then
-            quiet="--verbose"
-        else
             quiet="-q"
+        else
+            quiet="--verbose"
         fi
 
-        wget "${quiet}" -q -O "${file}" "https://raw.githubusercontent.com/briandowns/${repo}/${tag}/${file}"
+        wget "${quiet}" -O "${file}" "https://raw.githubusercontent.com/briandowns/${repo}/${tag}/${file}"
     done
 }
 
@@ -75,10 +76,24 @@ TAG="master"
 
 if [ "$2" != "" ]; then
     TAG=$2
-fi 
+fi
 
 trap cleanup EXIT
-update
-download "${REPO}" "${TAG}"
+
+if [ ! -e "${FLOTSAM_FILE}" ]; then
+    touch "${FLOTSAM_FILE}"
+
+    update
+    download "${REPO}" "${TAG}"
+
+    echo "${REPO}" "${TAG}" >> "${FLOTSAM_FILE}"
+else
+    update
+
+    while read -r line; do
+        set -- "${line}"
+        download "${1}" "${2}"
+    done < "${FLOTSAM_FILE}"
+fi
 
 exit 0
