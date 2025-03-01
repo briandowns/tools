@@ -80,20 +80,7 @@ fi
 
 trap cleanup EXIT
 
-if [ ! -e "${FLOTSAM_FILE}" ]; then
-    touch "${FLOTSAM_FILE}"
-
-    update
-    download "${REPO}" "${TAG}"
-
-    echo "${REPO}" "${TAG}" >> "${FLOTSAM_FILE}"
-else
-    update
-
-    while read -r line; do
-        set -- "${line}"
-        download "${1}" "${2}"
-    done < "${FLOTSAM_FILE}"
-fi
+update
+download "${REPO}" "${TAG}"
 
 exit 0
