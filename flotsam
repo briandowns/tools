@@ -31,6 +31,7 @@ if [ -n "${DEBUG}" ]; then
     set -x
 fi
 
+GITHUB_URL="https://raw.githubusercontent.com"
 USERNAME="briandowns"
 TOOLS_REPO="tools"
 MANIFEST_FILE="manifest.json"
@@ -46,14 +47,14 @@ cleanup() {
 }
 
 update() {
-    wget -O "${TMP_DIR}/manifest.json" "https://raw.githubusercontent.com/${USERNAME}/${TOOLS_REPO}/master/${MANIFEST_FILE}"
+    wget -O "${TMP_DIR}/manifest.json" "${GITHUB_URL}/${USERNAME}/${TOOLS_REPO}/master/${MANIFEST_FILE}"
 }
 
 download() {
     repo=$1
     tag=$2
 
-    for file in $(jq -r -c ".${repo}.files[]" < "${TMP_DIR}/manifest.json"); do
+    for file in $(jq -r -c ".${repo}.files[]" < "${TMP_DIR}/${MANIFEST_FILE}"); do
         if [ -n "${DEBUG}" ]; then
             quiet="--verbose"
         else
