@@ -55,10 +55,12 @@ download() {
 
     for file in $(jq -r -c ".${repo}.files[]" < "${TMP_DIR}/manifest.json"); do
         if [ -n "${DEBUG}" ]; then
-            wget --verbose -O "${file}" "https://raw.githubusercontent.com/briandowns/${repo}/${tag}/${file}"
+            quiet="--verbose"
         else
-            wget -q -O "${file}" "https://raw.githubusercontent.com/briandowns/${repo}/${tag}/${file}"
+            quiet="-q"
         fi
+
+        wget "${quiet}" -q -O "${file}" "https://raw.githubusercontent.com/briandowns/${repo}/${tag}/${file}"
     done
 }
 
