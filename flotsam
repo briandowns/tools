@@ -47,7 +47,7 @@ cleanup() {
 }
 
 update() {
-    wget -O "${TMP_DIR}/${MANIFEST_FILE}" "${GITHUB_URL}/${USERNAME}/${TOOLS_REPO}/master/${MANIFEST_FILE}"
+    wget -q -O "${TMP_DIR}/${MANIFEST_FILE}" "${GITHUB_URL}/${USERNAME}/${TOOLS_REPO}/master/${MANIFEST_FILE}"
 }
 
 download() {
