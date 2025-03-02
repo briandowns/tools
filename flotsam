@@ -35,7 +35,6 @@ GITHUB_URL="https://raw.githubusercontent.com"
 USERNAME="briandowns"
 TOOLS_REPO="tools"
 MANIFEST_FILE="manifest.json"
-FLOTSAM_FILE=".flotsam"
 
 TMP_DIR=$(mktemp -d)
 if [ ! "${TMP_DIR}" ] || [ ! -d "${TMP_DIR}" ]; then
@@ -48,7 +47,7 @@ cleanup() {
 }
 
 update() {
-    wget -O "${TMP_DIR}/manifest.json" "${GITHUB_URL}/${USERNAME}/${TOOLS_REPO}/master/${MANIFEST_FILE}"
+    wget -O "${TMP_DIR}/${MANIFEST_FILE}" "${GITHUB_URL}/${USERNAME}/${TOOLS_REPO}/master/${MANIFEST_FILE}"
 }
 
 download() {
@@ -62,7 +61,7 @@ download() {
             quiet="--verbose"
         fi
 
-        wget "${quiet}" -O "${file}" "https://raw.githubusercontent.com/briandowns/${repo}/${tag}/${file}"
+        wget "${quiet}" -O "${file}" "${GITHUB_URL}/briandowns/${repo}/${tag}/${file}"
     done
 }
 
@@ -79,7 +78,6 @@ if [ "$2" != "" ]; then
 fi
 
 trap cleanup EXIT
-
 update
 download "${REPO}" "${TAG}"
 

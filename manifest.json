@@ -51,5 +51,11 @@
             "benchmark.c",
             "benchmark.h"
         ]
+    },
+    "libtrietree": {
+        "files": [
+            "trie.c",
+            "trie.h"
+        ]
     }
 }

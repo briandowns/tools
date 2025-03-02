@@ -16,6 +16,7 @@ This repository contains a lot of the tools I use on a regular basis for daily d
 * [Safe Arrays](https://github.com/briandowns/safe_array_gen)
 * [HTTP Helpers](https://github.com/briandowns/libhttp)
 * [Remote Time](https://github.com/briandowns/r_time)
+* [Trie Tree](https://github.com/briandowns/libtrietree)
 
 ### Config
 
