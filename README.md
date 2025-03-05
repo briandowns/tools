@@ -6,7 +6,7 @@ This repository contains a lot of the tools I use on a regular basis for daily d
 
 ### Terminal
 
-* [Spinnerd](https://www.github.com/briandowns/libspinner)
+* [Spinner](https://www.github.com/briandowns/libspinner)
 * [Color](https://github.com/briandowns/libcolor)
 
 ### Dev
