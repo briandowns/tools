@@ -31,3 +31,8 @@ This repository contains a lot of the tools I use on a regular basis for daily d
 
 * [Spinner](https://www.github.com/briandowns/spinner)
 * [Simple HTTPD](https://github.com/briandowns/simple-httpd)
+
+## Utils
+
+* [Camus](https://github.com/briandowns/camus)
+
