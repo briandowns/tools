@@ -57,5 +57,12 @@
             "trie.c",
             "trie.h"
         ]
+    },
+    "libgtime": {
+        "files": [
+            "gtime.c",
+            "gtime.h"
+        ]
     }
+
 }
