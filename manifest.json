@@ -63,6 +63,11 @@
             "gtime.c",
             "gtime.h"
         ]
+    },
+    "libretry": {
+        "files": [
+            "retry.c",
+            "retry.h"
+        ]
     }
-
 }

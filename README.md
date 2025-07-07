@@ -17,6 +17,8 @@ This repository contains a lot of the tools I use on a regular basis for daily d
 * [HTTP Helpers](https://github.com/briandowns/libhttp)
 * [Remote Time](https://github.com/briandowns/r_time)
 * [Trie Tree](https://github.com/briandowns/libtrietree)
+* [Time](https://github.com/briandowns/libtime)
+* [Retry](https://github.com/briandowns/libtretry)
 
 ### Config
 
